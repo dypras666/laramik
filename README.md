@@ -1,4 +1,4 @@
-# Larvel Mirotik (Laramik) + SB Admin 2
+# Laravel Mirotik (Laramik) + SB Admin 2
 
 Larvel Mirotik Laravel 10.
 
