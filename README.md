@@ -1,6 +1,6 @@
 # Laravel Mirotik (Laramik) + SB Admin 2
 
-Larvel Mirotik Laravel 10.
+Laravel Mirotik - Laravel 10.
 
 | Laravel Version | Branch |
 | --------------- | ------ |
