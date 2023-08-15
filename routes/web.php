@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BasicController;
 use App\Http\Controllers\MikrotikController;
 use App\Http\Livewire\Mikrotik;
 use Illuminate\Support\Facades\Route;
@@ -39,6 +40,7 @@ Route::get('/blank', function () {
 
 Route::middleware('auth')->group(function () {
     Route::resource('basic', BasicController::class);
+    Route::post('update-token', [BasicController::class, 'update_token'])->name('update-token');
     Route::get('mikrotik/user',  [MikrotikController::class, 'user']);
     Route::get('mikrotik/log',  [MikrotikController::class, 'log']);
     Route::get('mikrotik/dhcp_leases',  [MikrotikController::class, 'dhcp_leases']);

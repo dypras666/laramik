@@ -13,35 +13,51 @@
                 @method('put')
 
                 <div class="form-group">
-                  <label for="name">Name</label>
-                  <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" placeholder="First name" autocomplete="off" value="{{ old('name') ?? $user->name }}">
-                  @error('name')
-                    <span class="text-danger">{{ $message }}</span>
-                  @enderror
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control @error('name') is-invalid @enderror" name="name"
+                        id="name" placeholder="First name" autocomplete="off" value="{{ old('name') ?? $user->name }}">
+                    @error('name')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
                 </div>
 
                 <div class="form-group">
-                  <label for="last_name">Last Name</label>
-                  <input type="text" class="form-control @error('last_name') is-invalid @enderror" name="last_name" id="last_name" placeholder="Last name" autocomplete="off" value="{{ old('last_name') ?? $user->last_name }}">
-                  @error('last_name')
-                    <span class="text-danger">{{ $message }}</span>
-                  @enderror
+                    <label for="last_name">Last Name</label>
+                    <input type="text" class="form-control @error('last_name') is-invalid @enderror" name="last_name"
+                        id="last_name" placeholder="Last name" autocomplete="off"
+                        value="{{ old('last_name') ?? $user->last_name }}">
+                    @error('last_name')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+
+
+                <div class="form-group">
+                    <label for="firebase_token">Device Token</label>
+                    <input type="text" class="form-control @error('firebase_token') is-invalid @enderror"
+                        name="firebase_token" id="firebase_token" placeholder="Device token" autocomplete="off"
+                        value="{{ old('firebase_token') ?? $user->firebase_token }}">
+                    @error('firebase_token')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
                 </div>
 
                 <div class="form-group">
-                  <label for="email">Email</label>
-                  <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" id="email" placeholder="Email" autocomplete="off" value="{{ old('email') ?? $user->email }}">
-                  @error('email')
-                    <span class="text-danger">{{ $message }}</span>
-                  @enderror
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control @error('email') is-invalid @enderror" name="email"
+                        id="email" placeholder="Email" autocomplete="off" value="{{ old('email') ?? $user->email }}">
+                    @error('email')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
                 </div>
 
                 <div class="form-group">
-                  <label for="password">Password</label>
-                  <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" id="password" placeholder="Password" autocomplete="off">
-                  @error('password')
-                    <span class="text-danger">{{ $message }}</span>
-                  @enderror
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control @error('password') is-invalid @enderror" name="password"
+                        id="password" placeholder="Password" autocomplete="off">
+                    @error('password')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
                 </div>
 
                 <button type="submit" class="btn btn-primary">Save</button>

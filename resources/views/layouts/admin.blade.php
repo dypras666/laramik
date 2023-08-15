@@ -64,6 +64,7 @@
             </div>
 
 
+
             <li class="nav-item  {{ $segment2 == 'monitoring' ? 'active' : '' }}">
                 <a class="nav-link   " href=" {{ url('mikrotik/monitoring') }} ">
                     <i class="fas fa-fw fa-chart-area"></i>
@@ -94,6 +95,14 @@
                     <span>Log Aktivitas</span>
                 </a>
 
+            </li>
+
+
+            <li class="nav-item  {{ $segment1 == 'basic' ? 'active' : '' }}">
+                <a class="nav-link   " href=" {{ url('basic') }} ">
+                    <i class="fas fa-fw fa-users"></i>
+                    <span>Akun Login Sistem</span>
+                </a>
             </li>
 
             <!-- Divider -->
@@ -387,6 +396,71 @@
     <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script>
     <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
     @stack('js')
+    <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase.js"></script>
+    <script>
+        var firebaseConfig = {
+            apiKey: "{{ config('mikrotik.fcm_key') }}",
+            authDomain: "{{ config('mikrotik.fb_domain') }}",
+            databaseURL: "{{ config('mikrotik.fb_database') }}",
+            projectId: "{{ config('mikrotik.fb_projectID') }}",
+            storageBucket: "{{ config('mikrotik.fb_bucket') }}",
+            messagingSenderId: "{{ config('mikrotik.fb_sender') }}",
+            appId: "{{ config('mikrotik.fb_appid') }}",
+            measurementId: "{{ config('mikrotik.fb_measure') }}"
+        };
+        // measurementId: G-R1KQTR3JBN
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const messaging = firebase.messaging();
+        initFirebaseMessagingRegistration()
+
+        function initFirebaseMessagingRegistration() {
+            messaging
+                .requestPermission()
+                .then(function() {
+                    return messaging.getToken()
+                })
+                .then(function(token) {
+                    console.log(token);
+
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+
+                    $.ajax({
+                        url: '{{ route('update-token') }}',
+                        type: 'POST',
+                        data: {
+                            firebase_token: token,
+                            id: '{{ Auth::user()->id }}'
+
+                        },
+                        dataType: 'JSON',
+                        success: function(response) {
+                            alert('Token saved successfully.');
+                        },
+                        error: function(err) {
+                            alert('User Chat Token Error' + err);
+                        },
+                    });
+
+                }).catch(function(err) {
+                    alert(err);
+                });
+        }
+
+
+        messaging.onMessage(function(payload) {
+            const noteTitle = payload.notification.title;
+            const noteOptions = {
+                body: payload.notification.body,
+                icon: payload.notification.icon,
+            };
+            new Notification(noteTitle, noteOptions);
+        });
+    </script>
 </body>
 
 </html>

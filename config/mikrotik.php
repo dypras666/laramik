@@ -1,6 +1,7 @@
 <?php
 return [
     "fcm_key" => env('FCM_KEY', "AIzaSyDKV6LBoajV3fSUeIe8J1xvS6Hc4LbVoX4"),
+    "fcm_server_key" => env('FCM_SERVER_KEY', "AAAAiGH35Sc:APA91bFJ3_C9BF6HBY8nuJnZtAQFqkZg5chrSVTVxIIt0IcJUPqzxAgqBU_y5p-QoF9hrmWmeCpNEx5boAM7Oon8xzYQus88bRYTJVlQf2MCLQDzaICXYB30fkA4P-k02GmJoRfQddDu"),
     "fcm_url" => env('FCM_URL', "https://fcm.googleapis.com/fcm/send"),
     "fb_domain" => env('FB_DOMAIN', "mikrotik-98046.firebaseapp.com"),
     "fb_database" => env('FB_DATABASE', "https://mikrotik-98046-default-rtdb.asia-southeast1.firebasedatabase.app/"),

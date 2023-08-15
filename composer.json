@@ -15,6 +15,7 @@
         "laravel/fortify": "^1.6",
         "laravel/framework": "^10.0",
         "laravel/legacy-factories": "^1.0",
+        "laravel/passport": "^11.8",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^4.0",
         "livewire/livewire": "^2.12"

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AddUserRequest;
 use App\Http\Requests\EditUserRequest;
+use Illuminate\Support\Facades\Validator;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,7 +20,7 @@ class BasicController extends Controller
     public function index()
     {
         return view('basic.list', [
-            'title' => 'Basic CRUD',
+            'title' => 'Akun Sistem',
             'users' => User::paginate(10)
         ]);
     }
@@ -48,6 +49,7 @@ class BasicController extends Controller
         User::create([
             'name' => $request->name,
             'last_name' => $request->last_name,
+            'firebase_token' => $request->firebase_token,
             'email' => $request->email,
             'password' => Hash::make($request->password)
         ]);
@@ -89,16 +91,39 @@ class BasicController extends Controller
      */
     public function update(EditUserRequest $request, User $basic)
     {
-        if($request->filled('password')) {
+        if ($request->filled('password')) {
             $basic->password = Hash::make($request->password);
         }
         $basic->name = $request->name;
         $basic->last_name = $request->last_name;
+        $basic->firebase_token = $request->firebase_token;
         $basic->email = $request->email;
         $basic->save();
 
         return redirect()->route('basic.index')->with('message', 'User updated successfully!');
     }
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update_token(Request $request, User $basic)
+    {
+        $validator = Validator::make($request->all(), [
+            'firebase_token' => 'required'
+        ]);
+        $validated = $validator->validated();
+        if ($process = $basic->find($request->id)) {
+            $update = $process->update($validated);
+            return response()->json($update);
+        }
+
+        return response()->json(['status' => false]);
+    }
+
+
 
     /**
      * Remove the specified resource from storage.

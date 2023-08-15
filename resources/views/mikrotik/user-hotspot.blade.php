@@ -29,7 +29,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @php $i =  ($data->currentpage()-1)* $data->perpage(); @endphp
+                                @php $i =  ($data->currentpage()-1) * $data->perpage(); @endphp
                                 @foreach ($data as $user)
                                     <tr>
                                         <td>{{ $i }}</td>
